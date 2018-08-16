@@ -35,11 +35,6 @@ export default class ZxingWrapper {
 
     public decodeFromVideoElement(videoElement: HTMLVideoElement): Promise<Result> {
         return new Promise<Result>((resolve, reject) => {
-            if ( !videoElement.width || !videoElement.height ) {
-                videoElement.width = 640;
-                videoElement.height = 480;
-            }
-            
             this.reset();
             this._reader.videoElement = videoElement;
             this._reader.decodeOnceWithDelay(resolve, reject);
