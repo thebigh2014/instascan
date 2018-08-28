@@ -148,12 +148,12 @@ export default class Scanner extends EventEmitter {
 		return this._mirror;
 	}
 
-	private async enableScan() {
+	private async enableScan(facingMode) {
 		if (!this.camera) {
 			throw new Error('Camera is not defined.');
 		}
 
-		let stream = await this.camera.start();
+		let stream = await this.camera.start(facingMode);
 		this.video.srcObject = stream;
 		this.video.play();
 
@@ -226,7 +226,7 @@ export default class Scanner extends EventEmitter {
 			],
 			callbacks: {
 				onenteractive: async () => {
-					await this.enableScan();
+					await this.enableScan(null);
 					this.emit('active');
 				},
 				onleaveactive: async () => {

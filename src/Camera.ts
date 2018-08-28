@@ -29,7 +29,7 @@ export default class Camera {
 		this._stream = null;
 	}
 
-	async start() {
+	async start(facingMode) {
 		let constraints: any = {
 			audio: false,
 			video: {
@@ -42,6 +42,10 @@ export default class Camera {
 				optional: []
 			}
 		};
+
+		if ( facingMode && typeof facingMode === 'string' ) {
+			constraints.video.facingMode = facingMode;
+		}
 
 		this._stream = await Camera.wrapErrors( async () => {
 			return await navigator.mediaDevices.getUserMedia( constraints );
