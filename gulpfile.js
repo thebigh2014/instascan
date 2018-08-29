@@ -13,7 +13,7 @@ function bundle(file, release) {
     const options = { project: "tsconfig.json" };
 
     if (release)
-        options.target = "es5";
+        options.target = "es6";
 
     return browserify(file)
         .plugin(tsify, options)
